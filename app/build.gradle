@@ -1,0 +1,223 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "de.mannodermaus.android-junit5"
+
+repositories {
+    maven { url 'https://github.com/leonardocardoso/mvn-repo/raw/master/maven-deploy' }
+}
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.umanji.umanjiapp"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+        junitPlatform {
+            filters {
+                engines {
+                    include 'spek'
+                }
+            }
+        }
+    }
+}
+
+androidExtensions {
+    experimental = true     // To use Parcelable
+}
+
+dependencies {
+    def dependencies = rootProject.ext.commonDependencies
+    def testDependencies = rootProject.ext.commonTestDependencies
+    def androidTestDependencies = rootProject.ext.commonAndroidTestDependencies
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:support-annotations:27.0.2'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    /*******************************************
+     * Multidex support library for prior
+     * to Android 5.0
+     *******************************************/
+    implementation 'com.android.support:multidex:1.0.2'
+
+    /*******************************************
+     * Common Dependencies
+     *******************************************/
+    compileOnly dependencies.javaxInject
+    implementation dependencies.rxKotlin
+
+    /*******************************************
+     * Common Test Dependencies
+     *******************************************/
+    testImplementation testDependencies.spek
+    testRuntimeOnly testDependencies.junitPlatformEngine
+    testImplementation testDependencies.mockitoKotlin
+    testImplementation testDependencies.kluent
+
+    /*******************************************
+     * Common Android Test Dependencies
+     *******************************************/
+    androidTestImplementation androidTestDependencies.androidTestRunner
+    androidTestImplementation androidTestDependencies.espresso
+    androidTestImplementation testDependencies.kluent
+
+    /**********************************************
+     * Dependency according to dependency rule
+     * in Clean Architecture.
+     **********************************************/
+    implementation project(':domain')
+    implementation project(':data')
+
+    /**********************************************
+     * Google GMS APIs
+     **********************************************/
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
+    implementation 'com.google.android.gms:play-services-places:11.8.0'
+
+    /**********************************************
+     * Google Maps APIs
+     **********************************************/
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+
+    /**********************************************
+     * Android-ReactiveLocation
+     * Small library that wraps Google Play Service
+     * API in brilliant RxJava Observables reducing
+     * boilerplate to minimum
+     *
+     * https://github.com/mcharmas/Android-ReactiveLocation
+     **********************************************/
+    implementation 'pl.charmas.android:android-reactive-location2:2.1@aar'
+
+    /**********************************************
+     * RxPermissions
+     * Android runtime permissions powered by RxJava
+     *
+     * https://github.com/tbruyelle/RxPermissions
+     **********************************************/
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+
+    /**********************************************
+     * RxGallery
+     * Android gallery & photo/video functionality
+     * simplified with RxJava2
+     *
+     * https://github.com/marchinram/RxGallery
+     **********************************************/
+    implementation 'com.github.marchinram:RxGallery:0.6.3'
+
+    /**********************************************
+     * Glide
+     * An image loading and caching library for
+     * Android focused on smooth scrolling
+     *
+     * https://github.com/bumptech/glide
+     **********************************************/
+    implementation('com.github.bumptech.glide:glide:4.5.0') {
+        exclude group: 'com.android.support'
+    }
+    kapt 'com.github.bumptech.glide:compiler:4.5.0'
+
+    /**********************************************
+     * Guava
+     * Google Core Libraries for Java
+     *
+     * For using cache
+     * https://github.com/google/guava
+     **********************************************/
+    implementation('com.google.guava:guava:23.6-android') {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    }
+
+    /**********************************************
+     * Dagger2
+     * A fast dependency injector for Android and Java.
+     *
+     * https://github.com/google/dagger
+     **********************************************/
+    implementation 'com.google.dagger:dagger:2.14.1'
+    kapt 'com.google.dagger:dagger-compiler:2.14.1'
+
+    /**********************************************
+     * RxAndroid
+     * RxJava bindings for Android
+     *
+     * https://github.com/ReactiveX/RxAndroid
+     **********************************************/
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    /**********************************************
+     * Converter-Gson, Adapter-rxJava2
+     *
+     * https://github.com/square/retrofit
+     *********************************************/
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    /**********************************************
+     * OkHttp3 Logging Interceptor
+     *
+     * https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
+     *********************************************/
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
+    /**********************************************
+     * CircleImageView
+     *
+     * https://github.com/hdodenhof/CircleImageView
+     *********************************************/
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    /**********************************************
+     * HeaderRecyclerView
+     * RecyclerView with header
+     *
+     * https://github.com/Karumi/HeaderRecyclerView
+     *********************************************/
+    implementation 'com.karumi:headerrecyclerview:1.1.0'
+
+    /**********************************************
+     * Android-Link-Preview
+     * It makes a preview from an url, grabbing
+     * all the information such as title,
+     * relevant texts and images.
+     *
+     * https://github.com/LeonardoCardoso/Android-Link-Preview
+     *********************************************/
+    implementation 'org.jsoup:jsoup:1.8.3'
+    implementation 'com.leocardz:link-preview:2.0.0@aar'
+}

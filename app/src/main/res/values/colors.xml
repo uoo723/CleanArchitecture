@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- default color -->
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#9A9A9A</color>
+
+    <!-- my custom color -->
+    <color name="bg_menu_gray">#9a9a9a</color>
+    <color name="bg_gray">#b0b0b0</color>
+    <color name="text_gray">#D0D0D0</color>
+    <color name="text_gray_post">#4E5665</color>
+    <color name="text_gray_time">#9197A3</color>
+    <color name="text_black">#1D2129</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="bg_base">#f5f6f7</color>
+    <color name="divider">#eaeaea</color>
+
+    <color name="post_title">#222222</color>
+    <color name="post_content">#1D2129</color>
+    <color name="post_edit">#333333</color>
+
+    <color name="img_trans">#38000000 </color>
+
+    <!-- toolbar-->
+    <color name="toolbar_background">#FFFFFF</color>
+
+    <!-- App Background -->
+    <color name="base_gray">#DCDEE3</color>
+
+    <!-- Color -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="five_bill">#cf9b2a</color>
+
+    <!-- button -->
+    <color name="yellow1">#ffe100</color>
+    <color name="yellow2">#f1db37</color>
+    <color name="grey05">#d7d6d0</color>
+    <color name="orange4">#ffa000</color>
+    <color name="orange5">#ce9e40</color>
+    <color name="blue2">#2962ff</color>
+    <color name="blue25">#3cadf2</color>
+
+    <!-- Text shadow-->
+    <color name="text_shadow">#7F000000</color>
+
+
+</resources>

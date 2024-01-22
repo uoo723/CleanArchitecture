@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/nav_header_height"
+              android:background="@color/bg_menu_gray"
+              android:gravity="bottom"
+              android:orientation="vertical"
+              android:padding="@dimen/activity_vertical_margin"
+              android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_navi_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/img_profile_default" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:singleLine="true"
+        android:text="손님"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인을 해주세요."
+        android:textSize="14sp" />
+
+</LinearLayout>

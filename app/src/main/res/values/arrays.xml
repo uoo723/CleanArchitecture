@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="time_decor">
+        <item>방금 전</item>
+        <item>분 전</item>
+        <item>시간 전</item>
+        <item>일 전</item>
+        <item>달 전</item>
+        <item>년 전</item>
+    </string-array>
+</resources>

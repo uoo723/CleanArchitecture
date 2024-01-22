@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/coordinator_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_gray"
+    tools:context=".ui.post.PostActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
+        android:theme="@style/AppTheme"
+        tools:targetApi="lollipop">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:elevation="0dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:popupTheme="@style/AppTheme"
+            app:subtitleTextColor="@color/text_black"
+            app:title="@string/activity_post"
+            app:titleTextColor="@color/text_black" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="10dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="60dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="30dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="10dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/img_profile_default"
+                app:layout_constraintBottom_toTopOf="@+id/guide1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/post_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:paddingTop="3dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toRightOf="@+id/profile_image"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guide3"
+                tools:text="우만지님이 신길 6동에서 작성함." />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/text_gray_post"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toRightOf="@+id/profile_image"
+                app:layout_constraintTop_toBottomOf="@+id/post_title"
+                tools:text="방금전" />
+
+            <ImageView
+                android:id="@+id/top_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:src="@color/divider"
+                app:layout_constraintTop_toBottomOf="@+id/time"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:minLines="1"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/post_content"
+                android:textSize="17sp"
+                app:layout_constraintTop_toBottomOf="@+id/top_divider"
+                tools:text="lorem" />
+
+            <android.support.v4.widget.ContentLoadingProgressBar
+                android:id="@+id/link_preview_loading"
+                style="?android:progressBarStyle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <include
+                android:id="@+id/link_preview"
+                layout="@layout/link_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/content"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitStart"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/comment"
+                app:layout_constraintTop_toBottomOf="@+id/link_preview"
+                app:layout_goneMarginTop="0dp"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/test_1"
+                tools:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/thumb_up"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btn_oval"
+                android:scaleType="center"
+                android:visibility="gone"
+                app:layout_constraintRight_toLeftOf="@+id/thumb_down"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:srcCompat="@drawable/ic_thumb_up"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/thumb_down"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btn_oval"
+                android:scaleType="center"
+                android:visibility="gone"
+                app:layout_constraintRight_toLeftOf="@+id/comment"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:srcCompat="@drawable/ic_thumb_down"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/comment"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_oval"
+                android:scaleType="center"
+                app:layout_constraintBottom_toTopOf="@+id/guide4"
+                app:layout_constraintRight_toRightOf="parent"
+                app:srcCompat="@drawable/ic_comment"
+                tools:ignore="ContentDescription" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guide4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="30dp" />
+
+            <ImageView
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                app:layout_constraintTop_toBottomOf="@+id/guide4"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="정보채널 :"
+                android:textColor="@color/text_gray_post"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guide4"
+                app:layout_constraintVertical_bias="1"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/post_channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/channel"
+                app:layout_constraintTop_toBottomOf="@+id/guide4"
+                app:layout_constraintVertical_bias="1"
+                tools:text="#정보채널" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
